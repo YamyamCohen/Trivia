@@ -24,8 +24,9 @@ def recv_message_and_parse(client_socket):
     If error occurred, will return None, None
     """
     data = client_socket.recv(10021).decode()
+    print(data)
     cmd, msg = chatlib.parse_message(data)
-    if cmd != chatlib.ERROR_RETURN or msg != chatlib.ERROR_RETURN:
+    if cmd is not chatlib.ERROR_RETURN or msg is not chatlib.ERROR_RETURN:
         # print(f"The server sent: {data}")
         # print(f"command: {cmd}, message: {msg}")
         return cmd, msg
@@ -184,4 +185,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
