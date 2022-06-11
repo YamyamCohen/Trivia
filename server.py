@@ -4,8 +4,9 @@ import chatlib
 import random
 import json
 
-IP = socket.gethostbyname(socket.gethostname())
-PORT = 6853
+#IP = socket.gethostbyname(socket.gethostname())
+IP = "127.0.0.1"
+PORT = 2604
 
 users = {}
 questions = {}
@@ -68,23 +69,23 @@ def handle_client_message(server_socket, cmd, data):
     hostname = server_socket.getpeername()
     if hostname not in logged_users.keys():
         pass
-    if cmd == chatlib.PROTOCOL_CLIENT['login_msg']:
+    if cmd == chatlib.PROTOCOL_CLIENT["login_msg"]:
         handle_login_message(server_socket, data)
     else:
         username = logged_users[hostname]
-        if cmd == chatlib.PROTOCOL_CLIENT['logout_msg']:
+        if cmd == chatlib.PROTOCOL_CLIENT["logout_msg"]:
             handle_logout_message(server_socket)
-        elif cmd == chatlib.PROTOCOL_CLIENT['getscore_msg']:
+        elif cmd == chatlib.PROTOCOL_CLIENT["getscore_msg"]:
             handle_getscore_message(server_socket, username)
-        elif cmd == chatlib.PROTOCOL_CLIENT['highscore_msg']:
+        elif cmd == chatlib.PROTOCOL_CLIENT["gethighscore_msg"]:
             handle_highscore_message(server_socket)
             pass
-        elif cmd == chatlib.PROTOCOL_CLIENT['logged_msg']:
+        elif cmd == chatlib.PROTOCOL_CLIENT["getlogged_msg"]:
             handle_logged_message(server_socket)
             pass
-        elif cmd == chatlib.PROTOCOL_CLIENT['getquestion_msg']:
+        elif cmd == chatlib.PROTOCOL_CLIENT["getquestion_msg"]:
             handle_question_message(server_socket)
-        elif cmd == chatlib.PROTOCOL_CLIENT['sendanswer_msg']:
+        elif cmd == chatlib.PROTOCOL_CLIENT["sendanswer_msg"]:
             handle_answer_message(server_socket, username, data)
             pass
         else:
@@ -275,4 +276,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
